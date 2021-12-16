@@ -1,16 +1,14 @@
-class CurrentConditionsDisplay: Observer, DisplayElement {
+class CurrentConditionsDisplay(private var weatherData: WeatherData) : Observer, DisplayElement {
     private var temperature: Float = 0F
     private var humidity: Float = 0F
-    private var weatherData = WeatherData()
 
-    constructor(weatherData: WeatherData) {
-        this.weatherData = weatherData
+    init {
         weatherData.registerObserver(this)
     }
 
-    override fun update(temperature: Float, humidity: Float, pressure: Float) {
-        this.temperature = temperature
-        this.humidity = humidity
+    override fun update() {
+        this.temperature = weatherData.getTemperature()
+        this.humidity = weatherData.getHumidity()
         display()
     }
 

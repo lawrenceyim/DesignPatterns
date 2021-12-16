@@ -5,6 +5,14 @@ class WeatherData: Subject {
     private var humidity: Float = 0F
     private var pressure: Float = 0F
 
+    fun getTemperature(): Float {
+        return temperature
+    }
+
+    fun getHumidity(): Float {
+        return humidity
+    }
+
     override fun registerObserver(o: Observer) {
         observers.add(o)
     }
@@ -15,7 +23,7 @@ class WeatherData: Subject {
 
     override fun notifyObservers() {
         for (observer in observers) {
-            observer.update(temperature, humidity, pressure)
+            observer.update()
         }
     }
 
